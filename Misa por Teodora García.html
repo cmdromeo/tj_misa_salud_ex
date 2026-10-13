@@ -1,0 +1,267 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Misa por Teodora García</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Nunito:wght@600;700&display=swap">
+<style>
+/* Layout: tarjeta de invitación impresa (marco doble con esquinas ornamentadas) centrada sobre fondo rosa; debajo, panel con cuenta regresiva y botones */
+:root{
+  --fondo:#f9e3ea;      /* rosa empolvado de fondo */
+  --rosa:#f6cfdc;       /* rosa pastel */
+  --rubor:#fdeef3;      /* rosa muy claro */
+  --papel:#fffaf8;      /* cartulina */
+  --oro:#c48a92;        /* oro rosa para marcos y ornamentos */
+  --tinta:#5b3a4a;      /* texto principal */
+  --tenue:#8d6a7a;      /* texto secundario */
+  --acento:#d2709a;     /* rosa intenso, botones */
+  --f-titulo:"Cinzel", "Times New Roman", serif;
+  --f-texto:"Cormorant Garamond", "Georgia", serif;
+  --f-script:"Great Vibes", "Brush Script MT", cursive;
+  --f-ui:"Nunito", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+body{
+  background:
+    radial-gradient(40rem 26rem at 0% 0%, var(--rosa), transparent 65%),
+    radial-gradient(40rem 26rem at 100% 100%, var(--rosa), transparent 65%),
+    var(--fondo);
+  color:var(--tinta);
+  font-family:var(--f-texto);
+  padding-inline:16px;
+  padding-block:28px 40px;
+  min-height:100%;
+}
+.pagina{max-width:28rem;margin-inline:auto;display:flex;flex-direction:column;gap:1.25rem}
+
+/* ---------- Tarjeta ---------- */
+.tarjeta{
+  position:relative;
+  background:
+    radial-gradient(120% 70% at 50% 0%, var(--rubor), transparent 70%),
+    var(--papel);
+  border-radius:6px;
+  padding:14px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 24px 50px -22px rgba(170,80,115,.45),
+    0 6px 14px -8px rgba(170,80,115,.3);
+}
+.marco{
+  position:relative;
+  border:1.5px solid var(--oro);
+  outline:1px solid var(--oro);
+  outline-offset:-7px;
+  padding:3.25rem 1.5rem 2.75rem;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.9rem;
+}
+.esquina{position:absolute;width:62px;height:62px;color:var(--oro);pointer-events:none}
+.esquina.ti{top:-4px;left:-4px}
+.esquina.td{top:-4px;right:-4px;transform:scaleX(-1)}
+.esquina.bi{bottom:-4px;left:-4px;transform:scaleY(-1)}
+.esquina.bd{bottom:-4px;right:-4px;transform:scale(-1,-1)}
+
+.emblema{width:96px;height:96px}
+.intro{
+  font-size:1.15rem;font-style:italic;line-height:1.45;color:var(--tenue);
+  margin:0;max-width:20rem;text-wrap:balance;
+}
+h1{
+  font-family:var(--f-titulo);font-weight:600;
+  font-size:clamp(1.15rem,5.2vw,1.45rem);letter-spacing:.12em;line-height:1.35;
+  text-transform:uppercase;margin:0;text-wrap:balance;
+}
+h1 small{display:block;font-weight:400;font-size:.62em;letter-spacing:.32em;color:var(--oro);margin-bottom:.2rem}
+.separador{display:flex;align-items:center;gap:.6rem;width:100%;max-width:14rem;color:var(--oro)}
+.separador::before,.separador::after{content:"";flex:1;height:1px;background:currentColor}
+.separador svg{width:16px;height:16px;flex:none}
+.por{font-size:1.05rem;font-style:italic;color:var(--tenue);margin:0 0 -.6rem}
+.nombre{
+  font-family:var(--f-script);font-weight:400;
+  font-size:clamp(2.3rem,11vw,3rem);line-height:1.15;color:var(--acento);
+  margin:0;text-wrap:balance;
+}
+
+.cuando{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.75rem;
+  width:100%;margin-top:.25rem;
+}
+.cuando .lado{
+  font-family:var(--f-titulo);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;
+  border-block:1px solid var(--oro);padding:.45rem 0;
+}
+.cuando .dia{font-family:var(--f-titulo);font-size:3rem;line-height:1;color:var(--acento)}
+.cuando .mes{font-family:var(--f-titulo);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--tenue)}
+
+.lugar{margin:0;font-size:1.15rem;line-height:1.45}
+.lugar strong{font-weight:600;display:block;font-size:1.22rem}
+.lugar span{color:var(--tenue)}
+.despues{
+  margin:.25rem 0 0;font-size:1.1rem;line-height:1.45;font-style:italic;max-width:21rem;text-wrap:balance;
+}
+.despues strong{font-style:normal;font-weight:600}
+.versiculo{
+  margin:.5rem 0 0;font-family:var(--f-script);font-size:1.65rem;color:var(--oro);line-height:1.2;
+}
+.versiculo small{display:block;font-family:var(--f-titulo);font-size:.62rem;letter-spacing:.25em;color:var(--tenue);margin-top:.2rem}
+
+/* ---------- Panel inferior ---------- */
+.panel{
+  background:rgba(255,250,248,.75);
+  border:1px solid var(--rosa);
+  border-radius:20px;padding:1rem;
+  display:flex;flex-direction:column;gap:.85rem;
+  font-family:var(--f-ui);
+}
+.panel h2{
+  margin:0;text-align:center;font-family:var(--f-titulo);font-weight:400;
+  font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;color:var(--tenue);
+}
+.cuenta{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.cuenta div{background:var(--rubor);border-radius:14px;padding:.55rem .2rem;text-align:center;display:flex;flex-direction:column}
+.cuenta b{font-family:var(--f-titulo);font-weight:400;font-size:1.45rem;font-variant-numeric:tabular-nums;line-height:1.2;color:var(--acento)}
+.cuenta span{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue);font-weight:700}
+.cuenta-fin{text-align:center;color:var(--acento);font-weight:700;margin:0}
+.botones{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.btn{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  min-height:46px;padding:.5rem .75rem;border-radius:999px;
+  font:700 .88rem/1.2 var(--f-ui);text-decoration:none;
+  border:1.5px solid var(--acento);color:var(--acento);background:var(--papel);
+  transition:transform .15s ease;
+}
+.btn.lleno{background:var(--acento);color:#fff}
+.btn.ancho{grid-column:1/-1}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus-visible{outline:3px solid var(--tinta);outline-offset:2px}
+
+@media (prefers-reduced-motion:no-preference){
+  .tarjeta{animation:entra .9s ease-out both}
+  @keyframes entra{from{transform:translateY(10px) rotate(-.6deg)}to{transform:none}}
+  .rayos{animation:brilla 4s ease-in-out infinite;transform-origin:48px 40px}
+  @keyframes brilla{50%{opacity:.55}}
+}
+@media (max-width:370px){
+  .marco{padding-inline:1rem}
+  .cuando .dia{font-size:2.5rem}
+  .cuando .lado{font-size:.72rem;letter-spacing:.12em}
+}
+</style>
+
+<!-- Ornamento de esquina reutilizable -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="orn" viewBox="0 0 62 62">
+    <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+      <path d="M4 40 C4 18 18 4 40 4"/>
+      <path d="M10 46 C8 26 26 8 46 10"/>
+      <path d="M22 12 c-6 1 -9 6 -6 10 c3 3 7 0 6 -3"/>
+      <path d="M12 22 c1 -6 6 -9 10 -6 c3 3 0 7 -3 6"/>
+    </g>
+    <circle cx="9" cy="9" r="5" fill="#f6cfdc" stroke="currentColor" stroke-width="1.2"/>
+    <circle cx="9" cy="9" r="2" fill="currentColor"/>
+    <circle cx="44" cy="4" r="1.6" fill="currentColor"/>
+    <circle cx="4" cy="44" r="1.6" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<main class="pagina">
+  <article class="tarjeta" aria-label="Invitación a la Misa de Salud y Sanación">
+    <div class="marco">
+      <svg class="esquina ti"><use href="#orn"/></svg>
+      <svg class="esquina td"><use href="#orn"/></svg>
+      <svg class="esquina bi"><use href="#orn"/></svg>
+      <svg class="esquina bd"><use href="#orn"/></svg>
+
+      <!-- Cáliz con hostia y rayos, flanqueado por rosas -->
+      <svg class="emblema" viewBox="0 0 96 96" aria-hidden="true">
+        <g class="rayos" stroke="#c48a92" stroke-width="1.2" stroke-linecap="round">
+          <line x1="48" y1="8" x2="48" y2="16"/><line x1="33" y1="12" x2="37" y2="19"/><line x1="63" y1="12" x2="59" y2="19"/>
+          <line x1="22" y1="22" x2="28" y2="27"/><line x1="74" y1="22" x2="68" y2="27"/>
+        </g>
+        <circle cx="48" cy="30" r="10" fill="#fffaf8" stroke="#c48a92" stroke-width="1.5"/>
+        <path d="M48 24v12M42 30h12" stroke="#d2709a" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M30 42h36c0 11-8 18-18 18s-18-7-18-18z" fill="#f6cfdc" stroke="#c48a92" stroke-width="1.5"/>
+        <path d="M48 60v12" stroke="#c48a92" stroke-width="2"/>
+        <path d="M37 78c2-4 6-6 11-6s9 2 11 6z" fill="#f6cfdc" stroke="#c48a92" stroke-width="1.5"/>
+        <!-- rosas -->
+        <g>
+          <circle cx="16" cy="70" r="7" fill="#f3b6ca"/><path d="M12 69c2-3 6-3 8 0c-2 3-6 3-8 0z" fill="#e58aab"/>
+          <path d="M21 75c5 2 9 5 11 9" stroke="#a9cdb8" stroke-width="1.4" fill="none"/>
+          <ellipse cx="26" cy="80" rx="3.5" ry="1.6" transform="rotate(35 26 80)" fill="#a9cdb8"/>
+          <circle cx="80" cy="70" r="7" fill="#f3b6ca"/><path d="M76 69c2-3 6-3 8 0c-2 3-6 3-8 0z" fill="#e58aab"/>
+          <path d="M75 75c-5 2-9 5-11 9" stroke="#a9cdb8" stroke-width="1.4" fill="none"/>
+          <ellipse cx="70" cy="80" rx="3.5" ry="1.6" transform="rotate(-35 70 80)" fill="#a9cdb8"/>
+        </g>
+      </svg>
+
+      <p class="intro">Con fe, esperanza y mucho amor, tenemos el agrado de invitarle a la</p>
+
+      <h1><small>Santa</small>Misa de Salud y Sanación</h1>
+
+      <div class="separador" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="currentColor"/></svg></div>
+
+      <p class="por">por</p>
+      <p class="nombre">Teodora García Seminario</p>
+
+      <div class="cuando" aria-label="Domingo 25 de octubre de 2026 a las 10:00 a. m.">
+        <span class="lado">Domingo</span>
+        <div><div class="dia">25</div><div class="mes">Octubre</div></div>
+        <span class="lado">10:00 a.&nbsp;m.</span>
+      </div>
+
+      <p class="lugar">
+        <strong>Parroquia Nuestra Señora del Carmen</strong>
+        <span>Jr. Arica 505, San Miguel, Lima</span>
+      </p>
+
+      <div class="separador" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 14s-6-3.6-6-7.8A3.3 3.3 0 0 1 8 4a3.3 3.3 0 0 1 6 2.2C14 10.4 8 14 8 14z" fill="currentColor"/></svg></div>
+
+      <p class="despues">Después de la misa, sírvase pasar a las instalaciones de <strong>Av. Universitaria N.°&nbsp;431, Interior&nbsp;301</strong>.</p>
+
+      <p class="versiculo">“Yo soy el Señor que te sana”<small>Éxodo 15, 26</small></p>
+    </div>
+  </article>
+
+  <section class="panel" aria-label="Detalles útiles">
+    <h2>Faltan</h2>
+    <div id="cuenta" class="cuenta" aria-live="polite">
+      <div><b id="d">--</b><span>días</span></div>
+      <div><b id="h">--</b><span>horas</span></div>
+      <div><b id="m">--</b><span>min</span></div>
+      <div><b id="s">--</b><span>seg</span></div>
+    </div>
+    <p id="cuenta-fin" class="cuenta-fin" hidden>¡Hoy es el día! Le esperamos.</p>
+    <div class="botones">
+      <a class="btn lleno" href="https://www.google.com/maps/search/?api=1&query=Parroquia+Nuestra+Se%C3%B1ora+del+Carmen+Jir%C3%B3n+Arica+505+San+Miguel+Lima" target="_blank" rel="noopener">Ir a la parroquia</a>
+      <a class="btn lleno" href="https://www.google.com/maps/search/?api=1&query=Av.+Universitaria+431+San+Miguel+Lima" target="_blank" rel="noopener">Ir a la reunión</a>
+      <a class="btn ancho" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Misa+de+Salud+y+Sanaci%C3%B3n+-+Teodora+Garc%C3%ADa+Seminario&dates=20261025T150000Z/20261025T160000Z&location=Parroquia+Nuestra+Se%C3%B1ora+del+Carmen,+Jr.+Arica+505,+San+Miguel,+Lima&details=Despu%C3%A9s+de+la+misa:+Av.+Universitaria+N%C2%B0+431,+Int.+301" target="_blank" rel="noopener">Agendar en mi calendario</a>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var objetivo = Date.UTC(2026,9,25,15,0,0); // 25 oct 2026, 10:00 a. m. hora de Lima
+  var el = {d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
+  function dos(n){return n<10?'0'+n:''+n}
+  function tick(){
+    var t = objetivo - Date.now();
+    if(t<=0){
+      document.getElementById('cuenta').hidden = true;
+      document.querySelector('.panel h2').hidden = true;
+      document.getElementById('cuenta-fin').hidden = false;
+      return;
+    }
+    var s = Math.floor(t/1000);
+    el.d.textContent = Math.floor(s/86400);
+    el.h.textContent = dos(Math.floor(s%86400/3600));
+    el.m.textContent = dos(Math.floor(s%3600/60));
+    el.s.textContent = dos(s%60);
+    setTimeout(tick,1000);
+  }
+  tick();
+})();
+</script>
+
+</body></html>
