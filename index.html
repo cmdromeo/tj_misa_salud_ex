@@ -142,6 +142,85 @@ h1 small{display:block;font-weight:400;font-size:.62em;letter-spacing:.32em;colo
   .rayos{animation:brilla 4s ease-in-out infinite;transform-origin:48px 40px}
   @keyframes brilla{50%{opacity:.55}}
 }
+/* ---------- Sobre ---------- */
+.escena{
+  max-width:28rem;margin-inline:auto;min-height:80vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
+  text-align:center;
+}
+.escena .titulo{font-family:var(--f-script);font-size:clamp(2.2rem,10vw,2.8rem);color:var(--acento);margin:0;line-height:1.1}
+.escena .sub{font-family:var(--f-titulo);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--tenue);margin:-.9rem 0 0}
+.sobre{
+  position:relative;width:min(100%,340px);aspect-ratio:7/5;
+  perspective:1100px;border:0;padding:0;background:none;cursor:pointer;
+  filter:drop-shadow(0 22px 26px rgba(170,80,115,.35));
+}
+.sobre:focus-visible{outline:3px solid var(--tinta);outline-offset:8px;border-radius:8px}
+.sobre > *{position:absolute;inset:0;border-radius:8px}
+.s-fondo{background:#eeb3c6}
+.s-carta{
+  inset:8% 7% 6%;background:var(--papel);border-radius:4px;
+  border:1px solid var(--oro);outline:1px solid var(--oro);outline-offset:-5px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:12%;gap:.2rem;
+  transition:transform .9s cubic-bezier(.3,.8,.3,1) .55s;z-index:1;
+}
+.s-carta span{font-family:var(--f-titulo);font-size:.6rem;letter-spacing:.24em;color:var(--oro);text-transform:uppercase}
+.s-carta b{font-family:var(--f-script);font-weight:400;font-size:1.5rem;color:var(--acento)}
+.s-bolsillo{
+  background:linear-gradient(160deg,#f9d3df,#f4bccd);
+  clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);z-index:2;
+}
+.s-bolsillo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top right,transparent 49.6%,rgba(196,138,146,.35) 50%,transparent 50.6%),
+             linear-gradient(to top left,transparent 49.6%,rgba(196,138,146,.35) 50%,transparent 50.6%);
+}
+.s-para{
+  position:absolute;inset:auto 0 9% 0;z-index:3;
+  font-family:var(--f-texto);font-style:italic;font-size:1.05rem;color:var(--tinta);
+}
+.s-solapa{
+  bottom:auto;height:62%;
+  background:linear-gradient(180deg,#f6c4d4,#eeadc2);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;z-index:4;
+  transition:transform .6s ease-in, z-index 0s linear .3s;
+}
+.s-sello{
+  inset:auto;left:50%;top:62%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#e58aab,#c45f86 70%);
+  box-shadow:0 3px 6px rgba(120,40,70,.35), inset 0 0 0 4px rgba(255,255,255,.18);
+  display:grid;place-items:center;z-index:5;transition:opacity .3s ease, transform .3s ease;
+}
+.s-sello svg{width:24px;height:24px}
+.tocar{
+  font-family:var(--f-ui);font-weight:700;font-size:.9rem;color:#fff;background:var(--acento);
+  border:0;border-radius:999px;min-height:46px;padding:.6rem 1.4rem;cursor:pointer;
+  box-shadow:0 8px 18px -8px rgba(210,112,154,.8);
+}
+.tocar:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+
+.escena.abierto .s-sello{opacity:0;transform:scale(.6)}
+.escena.abierto .s-solapa{transform:rotateX(180deg);z-index:0}
+.escena.abierto .s-carta{transform:translateY(-58%)}
+.escena.abierto .tocar,.escena.abierto .s-para{opacity:0;transition:opacity .3s}
+.escena.saliendo{opacity:0;transform:scale(1.04);transition:opacity .45s ease, transform .45s ease}
+
+.pagina.revela{animation:aparece .7s ease-out both}
+@keyframes aparece{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.reabrir{
+  align-self:center;background:none;border:0;cursor:pointer;
+  font:600 .82rem var(--f-ui);color:var(--tenue);text-decoration:underline;text-underline-offset:3px;padding:.5rem;
+}
+@media (prefers-reduced-motion:no-preference){
+  .escena:not(.abierto) .sobre{animation:late 2.4s ease-in-out infinite}
+  @keyframes late{0%,70%,100%{transform:none}78%{transform:rotate(-2deg)}86%{transform:rotate(2deg)}93%{transform:rotate(-1deg)}}
+}
+@media (prefers-reduced-motion:reduce){
+  .s-carta,.s-solapa,.s-sello{transition:none}
+  .pagina.revela{animation:none}
+}
+
 @media (max-width:370px){
   .marco{padding-inline:1rem}
   .cuando .dia{font-size:2.5rem}
@@ -165,7 +244,21 @@ h1 small{display:block;font-weight:400;font-size:.62em;letter-spacing:.32em;colo
   </symbol>
 </svg>
 
-<main class="pagina">
+<section id="escena" class="escena" aria-label="Sobre de invitación">
+  <p class="titulo">Tienes una invitación</p>
+  <p class="sub">Santa Misa de Salud y Sanación</p>
+  <button id="sobre" class="sobre" type="button" aria-label="Abrir el sobre de la invitación">
+    <span class="s-fondo"></span>
+    <span class="s-carta"><span>Santa Misa</span><b>Teodora</b></span>
+    <span class="s-bolsillo"></span>
+    <span class="s-para">Para usted y su familia</span>
+    <span class="s-solapa"></span>
+    <span class="s-sello"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3h3v6h5v3h-5v9h-3v-9h-5V9h5z" fill="#fff4f7"/></svg></span>
+  </button>
+  <button id="tocar" class="tocar" type="button">Abrir invitación</button>
+</section>
+
+<main id="pagina" class="pagina" hidden>
   <article class="tarjeta" aria-label="Invitación a la Misa de Salud y Sanación">
     <div class="marco">
       <svg class="esquina ti"><use href="#orn"/></svg>
@@ -238,9 +331,37 @@ h1 small{display:block;font-weight:400;font-size:.62em;letter-spacing:.32em;colo
       <a class="btn ancho" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Misa+de+Salud+y+Sanaci%C3%B3n+-+Teodora+Garc%C3%ADa+Seminario&dates=20261025T150000Z/20261025T160000Z&location=Parroquia+Nuestra+Se%C3%B1ora+del+Carmen,+Jr.+Arica+505,+San+Miguel,+Lima&details=Despu%C3%A9s+de+la+misa:+Av.+Universitaria+N%C2%B0+431,+Int.+301" target="_blank" rel="noopener">Agendar en mi calendario</a>
     </div>
   </section>
+  <button id="reabrir" class="reabrir" type="button">Ver el sobre otra vez</button>
 </main>
 
 <script>
+(function(){
+  var escena = document.getElementById('escena');
+  var pagina = document.getElementById('pagina');
+  var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var abriendo = false;
+  function abrir(){
+    if(abriendo) return; abriendo = true;
+    escena.classList.add('abierto');
+    setTimeout(function(){ escena.classList.add('saliendo'); }, reducido ? 0 : 1500);
+    setTimeout(function(){
+      escena.hidden = true;
+      pagina.hidden = false;
+      pagina.classList.remove('revela'); void pagina.offsetWidth; pagina.classList.add('revela');
+      window.scrollTo(0,0);
+    }, reducido ? 50 : 1950);
+  }
+  function cerrar(){
+    pagina.hidden = true;
+    escena.classList.remove('abierto','saliendo');
+    escena.hidden = false;
+    abriendo = false;
+    window.scrollTo(0,0);
+  }
+  document.getElementById('sobre').addEventListener('click', abrir);
+  document.getElementById('tocar').addEventListener('click', abrir);
+  document.getElementById('reabrir').addEventListener('click', cerrar);
+})();
 (function(){
   var objetivo = Date.UTC(2026,9,25,15,0,0); // 25 oct 2026, 10:00 a. m. hora de Lima
   var el = {d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
