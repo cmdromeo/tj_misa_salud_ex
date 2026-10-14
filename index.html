@@ -1,4 +1,17 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Misa de Salud y Sanación por Teodora García Seminario · Domingo 25 de octubre, 10:00 a. m. · Parroquia Nuestra Señora del Carmen, San Miguel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Misa de sanación y salud para Teodora, ofrendada por sus hermanos">
+<meta property="og:description" content="Domingo 25 de octubre, 10:00 a. m. · Parroquia Nuestra Señora del Carmen, Jr. Arica 505, San Miguel. Toca para abrir la invitación.">
+<meta property="og:url" content="https://cmdromeo.github.io/misa-teodora/">
+<meta property="og:image" content="https://cmdromeo.github.io/misa-teodora/og-imagen.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f9e3ea">
 <title>Misa de sanación y salud para Teodora, ofrendada por sus hermanos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -221,12 +234,32 @@ h1 small{display:block;font-weight:400;font-size:.62em;letter-spacing:.32em;colo
   .pagina.revela{animation:none}
 }
 
+/* ---------- Música ---------- */
+.musica{
+  position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom, 0px));z-index:20;
+  width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--acento);color:#fff;display:grid;place-items:center;
+  box-shadow:0 10px 22px -8px rgba(210,112,154,.85);
+}
+.musica svg{width:24px;height:24px}
+.musica:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+.musica .off{display:none}
+.musica.pausa .on{display:none}
+.musica.pausa .off{display:block}
+.musica.pausa{background:var(--papel);color:var(--acento);border:1.5px solid var(--acento)}
+@media (prefers-reduced-motion:no-preference){
+  .musica:not(.pausa){animation:pulso 2.4s ease-in-out infinite}
+  @keyframes pulso{50%{box-shadow:0 0 0 10px rgba(210,112,154,.18),0 10px 22px -8px rgba(210,112,154,.85)}}
+}
+
 @media (max-width:370px){
   .marco{padding-inline:1rem}
   .cuando .dia{font-size:2.5rem}
   .cuando .lado{font-size:.72rem;letter-spacing:.12em}
 }
 </style>
+</head><body>
+
 
 <!-- Ornamento de esquina reutilizable -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -334,14 +367,37 @@ h1 small{display:block;font-weight:400;font-size:.62em;letter-spacing:.32em;colo
   <button id="reabrir" class="reabrir" type="button">Ver el sobre otra vez</button>
 </main>
 
+<audio id="audio" src="musica.mp3" loop preload="auto"></audio>
+<button id="musica" class="musica pausa" type="button" aria-label="Reproducir música" hidden>
+  <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/></svg>
+  <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+</button>
+
 <script>
 (function(){
   var escena = document.getElementById('escena');
   var pagina = document.getElementById('pagina');
   var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var audio = document.getElementById('audio');
+  var bMusica = document.getElementById('musica');
+  function estado(){
+    var on = !audio.paused;
+    bMusica.classList.toggle('pausa', !on);
+    bMusica.setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música');
+  }
+  function sonar(){
+    bMusica.hidden = false;
+    try{ audio.volume = .8; var p = audio.play(); if(p && p.then) p.then(estado, estado); }catch(e){ estado(); }
+  }
+  bMusica.addEventListener('click', function(){
+    if(audio.paused){ sonar(); } else { audio.pause(); estado(); }
+  });
+  audio.addEventListener('play', estado);
+  audio.addEventListener('pause', estado);
   var abriendo = false;
   function abrir(){
     if(abriendo) return; abriendo = true;
+    sonar();
     escena.classList.add('abierto');
     setTimeout(function(){ escena.classList.add('saliendo'); }, reducido ? 0 : 1500);
     setTimeout(function(){
